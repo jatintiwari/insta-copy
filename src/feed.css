@@ -1,0 +1,78 @@
+.feed {
+    display: flex;
+    flex-direction: column;
+    overflow-y: hidden;
+}
+.feed .feed-container {
+    display: flex;
+    flex-direction: column;
+}
+.feed .feed-container .feed-label-container {
+    display: flex;
+    padding: 16px 16px 16px 16px;
+    justify-content: space-between;
+    align-items: center;
+}
+.feed .feed-container .feed-label-container .photo-username-container {
+    display: flex;
+    flex-direction: row;
+}
+.feed .feed-container .feed-label-container .photo-username-container .photo-container {
+    width: 42px;
+    height: 42px;
+    padding: 3px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    border-radius: 50%;
+}
+.feed .feed-container .feed-label-container .photo-container img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+}
+.feed .feed-container .feed-label-container .photo-username-container .username {
+    padding-left: 10px;
+    font-weight: 500;
+    text-align: center;
+}
+.feed .feed-container .feed-image {
+    height: 400px;
+    width: 375px;
+}
+.feed .feed-container .feed-data{
+  padding: 0 8px;
+}
+.feed .feed-container .feed-data .like-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.feed .feed-container .feed-data .like-section .like-group {
+    display: flex;
+    flex-direction: row;
+}
+.feed .feed-container .feed-data .likes .image-container img{
+  width: 15px;
+}
+.feed .feed-container .feed-data .like-section .like-group .like-button {
+    padding: 8px;
+}
+.feed .feed-container .feed-data .like-section .like-group .comment-button {
+    padding: 8px;
+}
+.feed .feed-container .feed-data .like-section .like-group .send-button {
+    padding: 8px;
+}
+.feed .feed-container .feed-data .like-section .save-button {
+    padding: 8px;
+}
+
+.feed .feed-container .comments-section {
+  margin: 0px 8px 8px;
+}
+
+.feed .feed-container .comments-section .comment {
+  font-size: 14px;
+  margin: 4px 0;
+}
