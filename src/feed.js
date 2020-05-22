@@ -1,7 +1,8 @@
 import React, { Component, useState } from "react";
 import "./feed.css";
 import Data, { feeds } from "./data.js";
-
+const likesArr = window.localStorage.getItem("likes");
+let likes = JSON.parse(likesArr || "[]");
 const OptionsButton = () => (
     <svg aria-label="More options" class="_8-yf5 " fill="#262626" height="16" viewBox="0 0 48 48" width="16">
         <circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle>
@@ -93,17 +94,65 @@ function Caption(props) {
         </div>
     );
 }
-class Feed extends Component {
+
+class CaptionC extends Component {
+    state = {};
     constructor(props) {
         super(props);
         this.state = {
-            liked: this.props.feed.liked,
+            showTruncated: true,
+            value2: true,
+        };
+        this.handleMore = this.handleMore.bind(this);
+    }
+
+    handleMore() {
+        console.log({ handleMore: this.state.showTruncated });
+        this.setState({
+            showTruncated: false,
+            value2: false,
+        });
+    }
+
+    render() {
+        const { username, caption } = this.props;
+        const threshHoldLength = 10;
+        const truncatedCaption = caption.length > threshHoldLength ? caption.slice(0, threshHoldLength) + " ..." : caption;
+        return (
+            <div className="caption-section">
+                <strong>{username}</strong>&nbsp;
+                {caption.length > threshHoldLength && this.state.showTruncated ? (
+                    <span>
+                        {truncatedCaption} <span onClick={this.handleMore}>more</span>
+                    </span>
+                ) : (
+                    caption
+                )}
+            </div>
+        );
+    }
+}
+
+class Feed extends Component {
+    likes = [];
+    constructor(props) {
+        super(props);
+        const isLiked = likes.find((id) => id === this.props.feed.id);
+        this.state = {
+            liked: isLiked || this.props.feed.liked,
             bookmarked: this.props.feed.bookmarked,
         };
         this.handleLike = this.handleLike.bind(this);
         this.handleBookmark = this.handleBookmark.bind(this);
     }
     handleLike() {
+        if (this.state.liked) {
+            likes = likes.filter((id) => id !== this.props.feed.id);
+        } else {
+            likes = [...likes, this.props.feed.id];
+        }
+        console.log({ id: this.props.feed.id, likes: likes });
+        localStorage.setItem("likes", JSON.stringify(likes));
         this.setState({
             liked: !this.state.liked,
         });
@@ -150,7 +199,7 @@ class Feed extends Component {
                     </div>
 
                     {feed.totalLikes ? <Likes likes={feed.totalLikes} likedBy={feed.likedBy} /> : null}
-                    {feed.caption ? <Caption username={feed.username} caption={feed.caption} /> : null}
+                    {feed.caption ? <CaptionC username={feed.username} caption={feed.caption} /> : null}
 
                     <div className="comments-section">
                         {feed.comments.map((comment) => (
@@ -164,12 +213,6 @@ class Feed extends Component {
 }
 
 function Feeds() {
-    return (
-        <div className="feed">
-            {feeds.map((feed) => {
-                return <Feed feed={feed} id={feed.id} />;
-            })}
-        </div>
-    );
+    return <div className="feed">{feeds.map(feed => <Feed feed={feed} id={feed.id} />)}</div>;
 }
 export default Feeds;
