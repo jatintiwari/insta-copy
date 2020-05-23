@@ -110,7 +110,7 @@ export const feeds = [
         username: "mandy.takhar",
         userPhotoUrl:
             "https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-19/s320x320/98169029_2655318648047565_388616238739226624_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=VWZ1kGo-G5AAX_71EGn&oh=ce25cdb27cf4711d144a733ef7b26803&oe=5EEA6FDB",
-        feedImages: "https://225508-687545-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2019/05/Mandy-Takhar-picture.jpg",
+        feedImage: "https://225508-687545-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2019/05/Mandy-Takhar-picture.jpg",
         tagline: "This is a tag line",
         liked: false,
         comments: [

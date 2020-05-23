@@ -72,7 +72,23 @@
   margin: 0px 8px 8px;
 }
 
+.feed .feed-container .comments-section .view-all {
+    margin-top: 8px;
+    font-weight: 500;
+}
+
 .feed .feed-container .comments-section .comment {
   font-size: 14px;
   margin: 4px 0;
+}
+
+.small {
+    font-size: 12px;
+}
+.medium {
+    font-size: 14px;
+}
+
+.grey {
+    color: grey;
 }

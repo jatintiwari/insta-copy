@@ -133,11 +133,78 @@ class CaptionC extends Component {
     }
 }
 
+function FeedLabel(props) {
+    const { userPhotoUrl, username } = props; // this.props not required coz inside functional component
+    return (
+        <div className="feed-label-container">
+            <div className="photo-username-container">
+                <div className="photo-container">
+                    <img src={userPhotoUrl} alt="pic1" />
+                </div>
+                <div>
+                    <p className="username">{username}</p>
+                </div>
+            </div>
+            <div>
+                <OptionsButton />
+            </div>
+        </div>
+    );
+}
+
+const FeedImage = (props) => {
+    return <img src={props.img} alt="feedImage1" className="feed-image" />;
+};
+
+const LikeSection = (props) => {
+    const { liked, bookmarked, handleBookmark, handleLike } = props;
+    return (
+        <div className="like-section">
+            <div className="like-group">
+                <div className="like-button" onClick={handleLike}>
+                    {liked ? <LikedButton /> : <LikesButton />}
+                </div>
+                <div className="comment-button">
+                    <CommentButton />
+                </div>
+                <div className="send-button">
+                    <SendButton />
+                </div>
+            </div>
+            <div className="save-button" onClick={handleBookmark}>
+                {bookmarked ? <SavedButton /> : <SaveButton />}
+            </div>
+        </div>
+    );
+};
+
+class Comments extends Component {
+
+    handleViewAll = () => {  // no need to bind as arrow function in class are bound to 
+
+    }
+    render() {
+        const { comments } = this.props;
+        const threshold = 1;
+        const totalComments = comments.length;
+        const truncatedArr = totalComments > threshold ? comments.slice(0,threshold) : comments;
+        return (
+            <div className="comments-section">
+                <div className="medium grey view-all" onClick={this.handleViewAll}>View all {totalComments} comments</div>
+                {truncatedArr.map((comment) => (
+                    <Comment comment={comment} key={comment.id} />
+                ))}
+            </div>
+        );
+    }
+}
+
 class Feed extends Component {
     likes = [];
     constructor(props) {
         super(props);
         const isLiked = likes.find((id) => id === this.props.feed.id);
+        // console.log(likes,this.props.feed.id, { isLiked})
         this.state = {
             liked: isLiked || this.props.feed.liked,
             bookmarked: this.props.feed.bookmarked,
@@ -151,7 +218,6 @@ class Feed extends Component {
         } else {
             likes = [...likes, this.props.feed.id];
         }
-        console.log({ id: this.props.feed.id, likes: likes });
         localStorage.setItem("likes", JSON.stringify(likes));
         this.setState({
             liked: !this.state.liked,
@@ -163,49 +229,21 @@ class Feed extends Component {
         });
     }
     render() {
-        const { feed, id } = this.props;
+        const { feed, id } = this.props; // destruction method of getting keys from object. using this because inside class component
         return (
             <div key={id} className="feed-container">
-                <div className="feed-label-container">
-                    <div className="photo-username-container">
-                        <div className="photo-container">
-                            <img src={feed.userPhotoUrl} alt="pic1" />
-                        </div>
-                        <div>
-                            <p className="username">{feed.username}</p>
-                        </div>
-                    </div>
-                    <div>
-                        <OptionsButton />
-                    </div>
-                </div>
-                <img src={feed.feedImage} alt="feedImage1" className="feed-image" />
+                <FeedLabel userPhotoUrl={feed.userPhotoUrl} username={feed.username} />
+                <FeedImage img={feed.feedImage} />
                 <div className="feed-data">
-                    <div className="like-section">
-                        <div className="like-group">
-                            <div className="like-button" onClick={this.handleLike}>
-                                {this.state.liked ? <LikedButton /> : <LikesButton />}
-                            </div>
-                            <div className="comment-button">
-                                <CommentButton />
-                            </div>
-                            <div className="send-button">
-                                <SendButton />
-                            </div>
-                        </div>
-                        <div className="save-button" onClick={this.handleBookmark}>
-                            {this.state.bookmarked ? <SavedButton /> : <SaveButton />}
-                        </div>
-                    </div>
-
+                    <LikeSection
+                        handleBookmark={this.handleBookmark}
+                        handleLike={this.handleLike}
+                        liked={this.state.liked}
+                        bookmarked={this.state.bookmarked}
+                    />
                     {feed.totalLikes ? <Likes likes={feed.totalLikes} likedBy={feed.likedBy} /> : null}
                     {feed.caption ? <CaptionC username={feed.username} caption={feed.caption} /> : null}
-
-                    <div className="comments-section">
-                        {feed.comments.map((comment) => (
-                            <Comment comment={comment} key={comment.id} />
-                        ))}
-                    </div>
+                    <Comments comments={feed.comments} />
                 </div>
             </div>
         );
@@ -213,6 +251,12 @@ class Feed extends Component {
 }
 
 function Feeds() {
-    return <div className="feed">{feeds.map(feed => <Feed feed={feed} id={feed.id} />)}</div>;
+    return (
+        <div className="feed">
+            {feeds.map((feed) => (
+                <Feed feed={feed} id={feed.id} />
+            ))}
+        </div>
+    );
 }
 export default Feeds;
