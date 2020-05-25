@@ -1,8 +1,17 @@
 import React, { Component, useState } from "react";
 import "./feed.css";
 import Data, { feeds } from "./data.js";
-const likesArr = window.localStorage.getItem("likes");
-let likes = JSON.parse(likesArr || "[]");
+const likesArr = window.localStorage.getItem("likes"); // can be null or something like "[1,2,3]"
+let likes = JSON.parse(likesArr || "[]"); // if it is '[1,2,3]' then use likesArr otherwise use '[]' to parse the value
+/**
+ * JSON
+ *  - stringify => converts object/array into string.
+ *                      eg - {name: "avi"} -> stringify -> "{\"name\":\"avi\"}"
+ *                         - [1,2,3] -> stringify -> "[1,2,3]"
+ *  - parse => converts strings back to objects
+ *                      eg - "{\"name\":\"avi\"}"  -> parse -> {name: "avi"}
+ *                         - "[1,2,3]" -> parse -> [1,2,3]
+ */
 const OptionsButton = () => (
     <svg aria-label="More options" class="_8-yf5 " fill="#262626" height="16" viewBox="0 0 48 48" width="16">
         <circle clip-rule="evenodd" cx="8" cy="24" fill-rule="evenodd" r="4.5"></circle>
@@ -179,21 +188,33 @@ const LikeSection = (props) => {
 };
 
 class Comments extends Component {
-
-    handleViewAll = () => {  // no need to bind as arrow function in class are bound to 
-
-    }
+    state = {
+        showAll: false,
+    };
+    handleViewAll = () => {
+        // no need to bind as arrow function in class are bound to this always, no need of this.funcitonName = this.functionName.bind(this);
+        this.setState({
+            showAll: true,
+        });
+    };
     render() {
         const { comments } = this.props;
-        const threshold = 1;
+        if (!comments) {
+            return null;
+        }
         const totalComments = comments.length;
-        const truncatedArr = totalComments > threshold ? comments.slice(0,threshold) : comments;
         return (
             <div className="comments-section">
-                <div className="medium grey view-all" onClick={this.handleViewAll}>View all {totalComments} comments</div>
-                {truncatedArr.map((comment) => (
-                    <Comment comment={comment} key={comment.id} />
-                ))}
+                {this.state.showAll ? (
+                    comments.map((comment) => <Comment comment={comment} key={comment.id} />)
+                ) : (
+                    <div>
+                        <div className="medium grey view-all" onClick={this.handleViewAll}>
+                            View all {totalComments} comments
+                        </div>
+                        <Comment comment={comments[0]} key={comments[0].id} />
+                    </div>
+                )}
             </div>
         );
     }
@@ -203,20 +224,70 @@ class Feed extends Component {
     likes = [];
     constructor(props) {
         super(props);
-        const isLiked = likes.find((id) => id === this.props.feed.id);
+        const isLiked = likes.find((id) => id === this.props.id);
+        /**
+         * find => it is as same filter, return the first true value
+         *         eg: likes = []
+         *         likes => find => length of array is 0, return null
+         *         eg: likes = [1,2,3]
+            maps feeds => feed
+            - we are mapping on feeds array and each <Feed/> component get an unique feed object from the array
+            - then, we are mapping on likes array which has values [1,2,3]  
+            - then, find return the first match value which is equal (feed.id). which is 1 in the first case, 2 nd is another
+            - if the values is not falsly(ie. not undefined or null), then we consider isLiked as a true boolean
+                - Boolean(undefined) = false
+                - Boolean(null) = false
+                - Boolean("") = false
+                - Boolean(feed.id which is 1) = true
+            - so in our case find returns 1 and we mark isLiked in the component state its value
+                *          Feed(feed) =>
+                    *         likes => find => id = 1 => id === this.pros.feed.id(1)
+                *          Feed(feed) =>
+                    *         likes => find => id = 2 => id === this.pros.feed.id(2)
+         */
+
         // console.log(likes,this.props.feed.id, { isLiked})
         this.state = {
             liked: isLiked || this.props.feed.liked,
+            /**
+             * if it is not included in LS we will fall back to show values from data.
+             * so if [1,2,3] is stored LS isLiked value will be false for the id = 4
+             * but if id =4 in data.js has liked as true - this will make the condition true
+             * (false || true) - true
+             * (false || false) - false
+             * (false && true) - false
+             * (true && true) - true
+             */
             bookmarked: this.props.feed.bookmarked,
         };
         this.handleLike = this.handleLike.bind(this);
         this.handleBookmark = this.handleBookmark.bind(this);
     }
     handleLike() {
+        /**
+         * this.state.liked - it is initialized with the value from localstorage or from data.js
+         */
         if (this.state.liked) {
+            /**
+             * filter => it returns all the true values
+             *         eg: likes = []
+             *         likes => filter => length of array is 0, return empty arr []
+             *         eg: likes = [1,2,2,3,3,3]
+             *         likes => filter => 2 => [2,2]
+             *         eg: likes = [1,2,2,3,3,3]
+             *         likes => filter => !2 => [1,3,3,3]
+             */
             likes = likes.filter((id) => id !== this.props.feed.id);
+            /**
+             *          likes = [1,2,3]
+             *          Feed(feed) =>
+             *         likes => filter => id = 1 => id !== this.pros.feed.id(1) => [2,3]
+             *          Feed(feed) =>
+             *         likes => find => id = 2 => id === this.pros.feed.id(2) => [1,3]
+             */
         } else {
-            likes = [...likes, this.props.feed.id];
+            // likes = [...likes, this.props.feed.id];
+            likes.push(this.props.feed.id);
         }
         localStorage.setItem("likes", JSON.stringify(likes));
         this.setState({
