@@ -10,8 +10,9 @@ function App() {
   return (
     <div className="main-container" >
       <Header />
-      <Stories />
+      {/* <Stories /> */}
       <Feed />
+      {/* insert profile */}
       <Footer />
     </div>
   );

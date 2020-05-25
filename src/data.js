@@ -140,4 +140,31 @@ export const feeds = [
     },
 ];
 
-export default { stories, feeds };
+export const profile = {
+    id: 1,
+    username: "",
+    profilePhoto: "",
+    firstName: "",
+    lastName: "",
+    profileBio: "",
+    highlights: [
+        {
+            id: 1,
+            photo: "",
+            name: "",
+        },
+    ],
+    metadata: {
+        totalPost: "",
+        totalFollowers: "",
+        totalFollow: "",
+    },
+    posts: [
+        {
+            id: "",
+            photoUrl: "",
+        },
+    ],
+};
+
+export default { stories, feeds, profile };
