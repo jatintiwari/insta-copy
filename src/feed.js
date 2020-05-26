@@ -1,7 +1,10 @@
 import React, { Component, useState } from "react";
 import "./feed.css";
-import Data, { feeds } from "./data.js";
+import Stories from "./stories";
+
+import Data, { feeds, stories } from "./data.js";
 const likesArr = window.localStorage.getItem("likes"); // can be null or something like "[1,2,3]"
+
 let likes = JSON.parse(likesArr || "[]"); // if it is '[1,2,3]' then use likesArr otherwise use '[]' to parse the value
 /**
  * JSON
@@ -324,6 +327,7 @@ class Feed extends Component {
 function Feeds() {
     return (
         <div className="feed">
+            <Stories stories={stories} />
             {feeds.map((feed) => (
                 <Feed feed={feed} id={feed.id} />
             ))}

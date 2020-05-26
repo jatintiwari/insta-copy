@@ -1,7 +1,7 @@
 .App {
     font-family: sans-serif;
     text-align: center;
-  }
+}
 
 .header-container,
 .footer-container {
@@ -15,58 +15,86 @@
     right: 0;
     min-height: 40px;
     z-index: 10;
-  }
-  
-.header-container {
-      top: 0;
-    }
-    
-.footer-container {
-      bottom: 0;
-    }
+}
 
-    .header-container .camera-button{
-        padding: 8px;
-    }
-    .header-container .message-button{
-        padding: 8px;
-    }
-  
+.header-container {
+    top: 0;
+}
+
+.footer-container {
+    bottom: 0;
+}
+
+.header-container .camera-button {
+    padding: 8px;
+}
+.header-container .message-button {
+    padding: 8px;
+}
+
 .header-container .logo,
 .footer-container .logo {
     width: 103px;
     height: 29px;
-  }
-  
+}
+
 .stories {
     display: flex;
     flex-direction: row;
-    padding-top: 40px;
+    padding-top: 20px;
     overflow-y: hidden;
     background-color: rgb(245, 245, 245);
     border-top: 1px solid #ddd;
     border-bottom: 1px solid #ddd;
-  }
-  
+}
+
 .stories .story {
     padding: 5px;
-  }
+}
 .stories .story .photo-container {
     border: 1px solid #ccc;
     padding: 5px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
-  } 
-  
+}
+
 .stories .story .photo-container img {
     border-radius: 50%;
     height: 50px;
     width: 50px;
-  }
-  
+}
+
 .stories .story .username {
     text-align: center;
     font-size: 10px;
     padding-top: 5px;
-  }
+}
+
+.no-padding{
+    padding: 0;
+
+}
+
+.no-border{
+    border: none;
+
+}
+
+.white {
+    background-color: white;
+}
+
+.profile-pic img {
+    border-radius: 50%;
+}
+
+.profile-pic img.md {
+    height: 77px;
+    width: 77px;
+}
+
+.profile-pic img.sm {
+    height: 35px;
+    width: 35px;
+}

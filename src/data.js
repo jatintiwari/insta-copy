@@ -149,14 +149,44 @@ export const profile = {
     highlights: [
       {
         id: 1,
-        photo:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/90204214_1637984223015647_6235722418793609146_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=QDbvi27hhPYAX9t-r0S&oh=6d4ca7bf232e3631063b2f38edb16feb&oe=5EF6F74F",
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/90204214_1637984223015647_6235722418793609146_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=QDbvi27hhPYAX9t-r0S&oh=6d4ca7bf232e3631063b2f38edb16feb&oe=5EF6F74F",
         name:"GymLife"
       },
       {
         id: 2,
-        photo:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/91164958_105168967710751_8283672901876769004_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=6ilculfx39YAX-3CaTs&oh=8fa05396fb153aff8166c319bcb6f312&oe=5EF4A921",
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/91164958_105168967710751_8283672901876769004_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=6ilculfx39YAX-3CaTs&oh=8fa05396fb153aff8166c319bcb6f312&oe=5EF4A921",
         name:"whistler"
-      }
+      },
+      {
+        id: 1,
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/90204214_1637984223015647_6235722418793609146_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=QDbvi27hhPYAX9t-r0S&oh=6d4ca7bf232e3631063b2f38edb16feb&oe=5EF6F74F",
+        name:"GymLife"
+      },
+      {
+        id: 2,
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/91164958_105168967710751_8283672901876769004_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=6ilculfx39YAX-3CaTs&oh=8fa05396fb153aff8166c319bcb6f312&oe=5EF4A921",
+        name:"whistler"
+      },
+      {
+        id: 1,
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/90204214_1637984223015647_6235722418793609146_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=QDbvi27hhPYAX9t-r0S&oh=6d4ca7bf232e3631063b2f38edb16feb&oe=5EF6F74F",
+        name:"GymLife"
+      },
+      {
+        id: 2,
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/91164958_105168967710751_8283672901876769004_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=6ilculfx39YAX-3CaTs&oh=8fa05396fb153aff8166c319bcb6f312&oe=5EF4A921",
+        name:"whistler"
+      },
+      {
+        id: 1,
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/90204214_1637984223015647_6235722418793609146_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=QDbvi27hhPYAX9t-r0S&oh=6d4ca7bf232e3631063b2f38edb16feb&oe=5EF6F74F",
+        name:"GymLife"
+      },
+      {
+        id: 2,
+        photoUrl:"https://instagram.fluh2-1.fna.fbcdn.net/v/t51.2885-15/s150x150/91164958_105168967710751_8283672901876769004_n.jpg?_nc_ht=instagram.fluh2-1.fna.fbcdn.net&_nc_ohc=6ilculfx39YAX-3CaTs&oh=8fa05396fb153aff8166c319bcb6f312&oe=5EF4A921",
+        name:"whistler"
+      },
     ],
     metadata: {
         totalposts: 266,
